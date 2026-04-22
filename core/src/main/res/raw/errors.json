@@ -1,0 +1,49 @@
+{
+  "code_map": {
+    "401": "INVALID_API_KEY",
+    "403": "INVALID_API_KEY",
+    "429": "RATE_LIMITED",
+    "404": "MODEL_NOT_FOUND",
+    "400": "INVALID_PARAMETERS",
+    "402": "INSUFFICIENT_CREDITS",
+    "500": "PROVIDER_ERROR",
+    "502": "PROVIDER_ERROR",
+    "503": "PROVIDER_ERROR",
+    "504": "PROVIDER_ERROR",
+    "ECONNREFUSED": "NETWORK_ERROR",
+    "ECONNRESET": "NETWORK_ERROR",
+    "ETIMEDOUT": "TIMEOUT",
+    "TIMEOUT": "TIMEOUT"
+  },
+  "messages": {
+    "INVALID_API_KEY": "Invalid or missing API key. Please check your OpenRouter API key.",
+    "RATE_LIMITED": "Rate limit exceeded. Please wait before making more requests.",
+    "MODEL_NOT_FOUND": "Model not found. The model may have been removed or renamed.",
+    "MODEL_UNAVAILABLE": "Model is currently unavailable. This is common with free models. Try a different model.",
+    "INVALID_PARAMETERS": "Invalid parameters provided. Please check your request parameters.",
+    "INSUFFICIENT_CREDITS": "Insufficient credits. Please add more credits to your OpenRouter account.",
+    "PROVIDER_ERROR": "The model provider encountered an error. Please try again or use a different model.",
+    "NETWORK_ERROR": "Network error. Please check your internet connection.",
+    "TIMEOUT": "Request timed out. The model may be experiencing high load.",
+    "UNKNOWN": "An unknown error occurred. Please try again."
+  },
+  "tips": {
+    "INVALID_API_KEY": "Double-check your OpenRouter API key. You can find it at https://openrouter.ai/keys.",
+    "RATE_LIMITED": "Wait a few seconds before retrying.",
+    "INSUFFICIENT_CREDITS": "Visit https://openrouter.ai/credits to add more credits.",
+    "MODEL_NOT_FOUND": "Try refreshing the model list to get the latest models.",
+    "MODEL_UNAVAILABLE": "Free models are often intermittently unavailable. Use getBestFreeModel() to find a working one, or skip the test when adding.",
+    "PROVIDER_ERROR": "This model may be temporarily unavailable. Try another model.",
+    "INVALID_PARAMETERS": "Check that your parameters are within the model's supported range.",
+    "NETWORK_ERROR": "Check your internet connection and try again.",
+    "TIMEOUT": "The request timed out. Try again or use a different model.",
+    "UNKNOWN": "An unexpected error occurred. Please try again."
+  },
+  "retryable": [
+    "RATE_LIMITED",
+    "PROVIDER_ERROR",
+    "NETWORK_ERROR",
+    "TIMEOUT",
+    "MODEL_UNAVAILABLE"
+  ]
+}

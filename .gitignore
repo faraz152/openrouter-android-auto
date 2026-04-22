@@ -1,0 +1,42 @@
+# Android / Gradle
+*.iml
+.gradle/
+/local.properties
+/.idea/
+.DS_Store
+/build/
+/captures
+.externalNativeBuild
+.cxx
+*.apk
+*.aab
+*.dex
+*.class
+*.log
+
+# Module builds
+core/build/
+compose-ui/build/
+cli/build/
+sample-compose/build/
+sample-xml/build/
+
+# Kotlin
+*.kotlin_module
+
+# Local configuration (developer-specific, NEVER commit)
+.copilot/reference-path.local
+.env
+.env.local
+*.local
+
+# Signing
+*.jks
+*.keystore
+signing.properties
+
+# IDE
+.vscode/
+*.swp
+*.swo
+*~

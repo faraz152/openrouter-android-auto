@@ -1,0 +1,11 @@
+# Reference Path Configuration
+#
+# Copy this file to `reference-path.local` and set the absolute path
+# to your local clone of the `openrouter-auto` TypeScript project.
+#
+# This file is gitignored — each developer sets their own path.
+#
+# Example:
+# /Users/yourname/projects/openrouter-auto
+
+/path/to/your/local/openrouter-auto
