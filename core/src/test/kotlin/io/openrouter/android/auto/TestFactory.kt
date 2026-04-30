@@ -1,5 +1,7 @@
 package io.openrouter.android.auto
 
+import io.ktor.client.engine.mock.*
+import io.ktor.http.*
 import io.openrouter.android.auto.internal.CostRegistry
 import io.openrouter.android.auto.internal.ErrorRegistry
 import io.openrouter.android.auto.internal.ParameterRegistry
@@ -153,4 +155,70 @@ object TestFactory {
         retryable = retryable,
         details = details
     )
+
+    // ─── SSE Helpers ─────────────────────────────────────────────────────────
+
+    /** Build a well-formed SSE body from a list of JSON chunk strings + [DONE]. */
+    fun makeSseBody(vararg chunkJsons: String): String =
+        chunkJsons.joinToString("\n\n") { "data: $it" } + "\n\ndata: [DONE]\n\n"
+
+    // ─── MockEngine Builders ─────────────────────────────────────────────────
+
+    fun makeMockEngine(
+        modelsJson: String? = null,
+        chatJson: String? = null,
+        sseBody: String? = null,
+        errorStatus: HttpStatusCode? = null,
+        chatErrorStatus: HttpStatusCode? = null
+    ): MockEngine = MockEngine { request ->
+        when {
+            errorStatus != null -> respondError(errorStatus)
+
+            request.url.encodedPath.endsWith("/models") -> respond(
+                content = modelsJson ?: makeModelsApiResponse(listOf(makeModel())),
+                status = HttpStatusCode.OK,
+                headers = headersOf(HttpHeaders.ContentType, "application/json")
+            )
+
+            request.url.encodedPath.endsWith("/chat/completions") -> {
+                if (chatErrorStatus != null) {
+                    respondError(chatErrorStatus)
+                } else {
+                    val body = request.body.toByteArray().decodeToString()
+                    if (body.contains("\"stream\":true") && sseBody != null) {
+                        respond(
+                            content = sseBody,
+                            status = HttpStatusCode.OK,
+                            headers = headersOf(HttpHeaders.ContentType, "text/event-stream")
+                        )
+                    } else {
+                        respond(
+                            content = chatJson ?: json.encodeToString(makeChatResponse()),
+                            status = HttpStatusCode.OK,
+                            headers = headersOf(HttpHeaders.ContentType, "application/json")
+                        )
+                    }
+                }
+            }
+
+            else -> respondError(HttpStatusCode.NotFound)
+        }
+    }
+
+    /** Build a fully configured SDK with a [MockEngine] and in-memory storage. */
+    fun buildSdk(mockEngine: MockEngine): OpenRouterAuto {
+        val loader = TestFactory::class.java.classLoader!!
+        return OpenRouterAuto.Builder(
+            apiKey = "test-sk-key",
+            errorsJson = loader.getResourceAsStream("errors.json")!!.bufferedReader().readText(),
+            parametersJson = loader.getResourceAsStream("parameters.json")!!.bufferedReader().readText(),
+            platformParamsJson = loader.getResourceAsStream("platform_params.json")!!.bufferedReader().readText(),
+            costJson = loader.getResourceAsStream("cost.json")!!.bufferedReader().readText()
+        )
+            .httpClientEngine(mockEngine)
+            .storage(MemoryStorage())
+            .enableTesting(false)
+            .build()
+    }
 }
+
