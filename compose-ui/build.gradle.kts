@@ -45,4 +45,5 @@ dependencies {
     implementation(libs.compose.tooling.preview)
     debugImplementation(libs.compose.tooling)
     implementation(libs.lifecycle.viewmodel.compose)
+    implementation(libs.serialization.json)
 }
