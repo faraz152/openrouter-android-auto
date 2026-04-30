@@ -1,5 +1,6 @@
 package io.openrouter.android.auto
 
+import io.openrouter.android.auto.internal.CostRegistry
 import io.openrouter.android.auto.internal.ErrorRegistry
 import io.openrouter.android.auto.internal.ParameterRegistry
 import kotlinx.serialization.encodeToString
@@ -22,8 +23,8 @@ object TestFactory {
     // ─── Registry Init ──────────────────────────────────────────────────────
 
     /**
-     * Load ErrorRegistry and ParameterRegistry from src/test/resources/.
-     * Must be called before any test that exercises Errors.kt or Parameters.kt.
+     * Load ErrorRegistry, ParameterRegistry, and CostRegistry from src/test/resources/.
+     * Must be called before any test that exercises SDK functions.
      */
     fun initRegistries() {
         val loader = TestFactory::class.java.classLoader!!
@@ -33,9 +34,12 @@ object TestFactory {
             .bufferedReader().readText()
         val platformJson = loader.getResourceAsStream("platform_params.json")!!
             .bufferedReader().readText()
+        val costJson = loader.getResourceAsStream("cost.json")!!
+            .bufferedReader().readText()
 
         ErrorRegistry.init(errorsJson)
         ParameterRegistry.init(paramsJson, platformJson)
+        CostRegistry.init(costJson)
     }
 
     // ─── Model Builders ─────────────────────────────────────────────────────

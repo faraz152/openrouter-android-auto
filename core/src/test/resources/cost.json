@@ -1,0 +1,10 @@
+{
+  "price_tiers": {
+    "free": { "max_avg_price": 0 },
+    "cheap": { "max_avg_price": 0.0001 },
+    "moderate": { "max_avg_price": 0.01 },
+    "expensive": { "max_avg_price": null }
+  },
+  "token_estimate_chars_per_token": 4,
+  "message_overhead_tokens": 4
+}
