@@ -20,4 +20,13 @@ dependencies {
     implementation(libs.ktor.client.cio)
     implementation(libs.ktor.client.content.negotiation)
     implementation(libs.ktor.serialization.json)
+
+    testImplementation(libs.junit5.api)
+    testRuntimeOnly(libs.junit5.engine)
+    testImplementation(libs.coroutines.test)
+    testImplementation(libs.ktor.client.mock)
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
