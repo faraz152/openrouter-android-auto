@@ -23,6 +23,7 @@ sample-xml/build/
 
 # Kotlin
 *.kotlin_module
+.kotlin/
 
 # Local configuration (developer-specific, NEVER commit)
 .copilot/reference-path.local
