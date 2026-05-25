@@ -36,13 +36,13 @@ containing the absolute path to the `openrouter-auto` directory. This file is gi
 
 ## Module Structure
 
-| Module | Description | Dependencies |
-|---|---|---|
-| `:core` | Main SDK — types, HTTP, streaming, cost, errors, params, storage | Zero Android UI deps |
-| `:compose-ui` | Optional Jetpack Compose components | `:core` + Compose |
-| `:cli` | JVM command-line tool | `:core` (JVM only) |
-| `:sample-compose` | Compose demo app | `:core` + `:compose-ui` |
-| `:sample-xml` | XML Views demo app | `:core` |
+| Module            | Description                                                      | Dependencies            |
+| ----------------- | ---------------------------------------------------------------- | ----------------------- |
+| `:core`           | Main SDK — types, HTTP, streaming, cost, errors, params, storage | Zero Android UI deps    |
+| `:compose-ui`     | Optional Jetpack Compose components                              | `:core` + Compose       |
+| `:cli`            | JVM command-line tool                                            | `:core` (JVM only)      |
+| `:sample-compose` | Compose demo app                                                 | `:core` + `:compose-ui` |
+| `:sample-xml`     | XML Views demo app                                               | `:core`                 |
 
 **Module boundary rule:** Never add Android UI imports to `:core`. Never add business logic to `:compose-ui`.
 
@@ -67,16 +67,16 @@ Tests use **JUnit 5**, **MockK**, **Turbine**, and **Ktor MockEngine**. No real 
 
 ## Code Style
 
-| Rule | Detail |
-|---|---|
-| Language | Kotlin only — no Java files |
-| Formatting | Follow [Kotlin coding conventions](https://kotlinlang.org/docs/coding-conventions.html) |
-| Naming | `camelCase` for functions/variables, `PascalCase` for classes, `SCREAMING_SNAKE_CASE` for constants |
-| Serialization | `@SerialName("snake_case")` — never `@JsonProperty` or Gson |
-| Async | `suspend fun` for one-shot, `Flow<T>` for streaming |
-| Errors | Throw `ORAError(ORAErrorCode.X, ...)` — never raw `IllegalStateException` |
-| Preconditions | Use `require()` / `check()` — not `if (...) throw` |
-| HTTP client | Never create `HttpClient` per-request — reuse the single instance |
+| Rule          | Detail                                                                                              |
+| ------------- | --------------------------------------------------------------------------------------------------- |
+| Language      | Kotlin only — no Java files                                                                         |
+| Formatting    | Follow [Kotlin coding conventions](https://kotlinlang.org/docs/coding-conventions.html)             |
+| Naming        | `camelCase` for functions/variables, `PascalCase` for classes, `SCREAMING_SNAKE_CASE` for constants |
+| Serialization | `@SerialName("snake_case")` — never `@JsonProperty` or Gson                                         |
+| Async         | `suspend fun` for one-shot, `Flow<T>` for streaming                                                 |
+| Errors        | Throw `ORAError(ORAErrorCode.X, ...)` — never raw `IllegalStateException`                           |
+| Preconditions | Use `require()` / `check()` — not `if (...) throw`                                                  |
+| HTTP client   | Never create `HttpClient` per-request — reuse the single instance                                   |
 
 ---
 
@@ -126,17 +126,18 @@ All commits follow this format:
 [TYPE] Summary :emoji:
 ```
 
-| Type | Emoji | When |
-|---|---|---|
-| `FEAT` | ✨ | New feature |
-| `FIX` | 🐛 | Bug fix |
-| `DOCS` | 📚 | Documentation only |
-| `TEST` | 🚨 | Tests only |
-| `REFACTOR` | 📦 | Code restructure, no behavior change |
-| `BUILD` | 🛠️ | Gradle, CI, publishing |
-| `CHORE` | ♻️ | Maintenance, dependency bumps |
+| Type       | Emoji | When                                 |
+| ---------- | ----- | ------------------------------------ |
+| `FEAT`     | ✨    | New feature                          |
+| `FIX`      | 🐛    | Bug fix                              |
+| `DOCS`     | 📚    | Documentation only                   |
+| `TEST`     | 🚨    | Tests only                           |
+| `REFACTOR` | 📦    | Code restructure, no behavior change |
+| `BUILD`    | 🛠️    | Gradle, CI, publishing               |
+| `CHORE`    | ♻️    | Maintenance, dependency bumps        |
 
 Examples:
+
 ```
 [FEAT] Add image generation support ✨
 [FIX] Handle empty SSE chunks in StreamParser 🐛
@@ -158,6 +159,7 @@ Examples:
 ## Reporting Bugs
 
 Open an issue with:
+
 - Android version and device/emulator
 - SDK version (`auto-core` version)
 - Minimal reproducible code snippet

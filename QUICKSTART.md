@@ -220,10 +220,10 @@ CostEstimator(
 
 Full working examples are in the repository:
 
-| App | Path | Description |
-|---|---|---|
-| Compose sample | `sample-compose/` | Full chat app with Jetpack Compose |
-| XML sample | `sample-xml/` | Full chat app with Views + RecyclerView |
+| App            | Path              | Description                             |
+| -------------- | ----------------- | --------------------------------------- |
+| Compose sample | `sample-compose/` | Full chat app with Jetpack Compose      |
+| XML sample     | `sample-xml/`     | Full chat app with Views + RecyclerView |
 
 Clone the repo and open in Android Studio to run them directly.
 

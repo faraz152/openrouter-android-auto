@@ -120,36 +120,36 @@ See [QUICKSTART.md](QUICKSTART.md) for the full step-by-step guide with XML and 
 
 ### `OpenRouterAuto.Builder`
 
-| Method | Description |
-|---|---|
-| `Builder(apiKey)` | Required. Your OpenRouter API key |
-| `.baseUrl(url)` | Override API base URL (default: `https://openrouter.ai/api/v1`) |
-| `.siteUrl(url)` | Your app's URL (sent as `HTTP-Referer`) |
-| `.siteName(name)` | Your app's name (sent as `X-Title`) |
-| `.storage(adapter)` | Pluggable storage adapter |
-| `.httpClientEngine(engine)` | Override Ktor engine (e.g. OkHttp for testing) |
-| `.build()` | Returns `OpenRouterAuto` instance |
+| Method                      | Description                                                     |
+| --------------------------- | --------------------------------------------------------------- |
+| `Builder(apiKey)`           | Required. Your OpenRouter API key                               |
+| `.baseUrl(url)`             | Override API base URL (default: `https://openrouter.ai/api/v1`) |
+| `.siteUrl(url)`             | Your app's URL (sent as `HTTP-Referer`)                         |
+| `.siteName(name)`           | Your app's name (sent as `X-Title`)                             |
+| `.storage(adapter)`         | Pluggable storage adapter                                       |
+| `.httpClientEngine(engine)` | Override Ktor engine (e.g. OkHttp for testing)                  |
+| `.build()`                  | Returns `OpenRouterAuto` instance                               |
 
 ### Core Methods
 
-| Method | Returns | Description |
-|---|---|---|
-| `initialize()` | `Unit` | Fetch models + load registries. Call once on startup |
-| `fetchModels()` | `List<OpenRouterModel>` | Re-fetch models from API |
-| `getModels()` | `List<OpenRouterModel>` | Return cached model list |
-| `getModel(id)` | `OpenRouterModel?` | Find model by ID |
-| `filterModels(filter)` | `List<OpenRouterModel>` | Filter by capability, pricing, context |
-| `getBestFreeModel()` | `OpenRouterModel?` | Best available free model |
-| `chat(request)` | `ChatResponse` | One-shot completion |
-| `streamChat(request)` | `Flow<StreamChunk>` | SSE streaming completion |
-| `calculateCost(...)` | `CostBreakdown` | Token cost from pricing registry |
-| `estimateTokens(text)` | `Int` | Rough token count estimate |
-| `testModel(modelId)` | `ModelTestResult` | Ping a model with a test prompt |
-| `testAllModels()` | `List<ModelTestResult>` | Test all known models |
-| `savePreferences(prefs)` | `Unit` | Persist user preferences |
-| `getPreferences()` | `UserPreferences?` | Load persisted preferences |
-| `on(type, handler)` | `() -> Unit` | Subscribe to SDK events (returns unsubscribe fn) |
-| `dispose()` | `Unit` | Close HTTP client and release resources |
+| Method                   | Returns                 | Description                                          |
+| ------------------------ | ----------------------- | ---------------------------------------------------- |
+| `initialize()`           | `Unit`                  | Fetch models + load registries. Call once on startup |
+| `fetchModels()`          | `List<OpenRouterModel>` | Re-fetch models from API                             |
+| `getModels()`            | `List<OpenRouterModel>` | Return cached model list                             |
+| `getModel(id)`           | `OpenRouterModel?`      | Find model by ID                                     |
+| `filterModels(filter)`   | `List<OpenRouterModel>` | Filter by capability, pricing, context               |
+| `getBestFreeModel()`     | `OpenRouterModel?`      | Best available free model                            |
+| `chat(request)`          | `ChatResponse`          | One-shot completion                                  |
+| `streamChat(request)`    | `Flow<StreamChunk>`     | SSE streaming completion                             |
+| `calculateCost(...)`     | `CostBreakdown`         | Token cost from pricing registry                     |
+| `estimateTokens(text)`   | `Int`                   | Rough token count estimate                           |
+| `testModel(modelId)`     | `ModelTestResult`       | Ping a model with a test prompt                      |
+| `testAllModels()`        | `List<ModelTestResult>` | Test all known models                                |
+| `savePreferences(prefs)` | `Unit`                  | Persist user preferences                             |
+| `getPreferences()`       | `UserPreferences?`      | Load persisted preferences                           |
+| `on(type, handler)`      | `() -> Unit`            | Subscribe to SDK events (returns unsubscribe fn)     |
+| `dispose()`              | `Unit`                  | Close HTTP client and release resources              |
 
 ### Storage Adapters
 
