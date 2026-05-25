@@ -64,7 +64,7 @@ tasks.withType<Test> {
 mavenPublishing {
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, automaticRelease = true)
     signAllPublications()
-    coordinates("io.openrouter.android", "auto-core", "1.0.0")
+    coordinates("io.openrouter.android", "auto-core", "1.0.1")
     pom {
         name.set("OpenRouter Android Auto — Core")
         description.set("Pure-Kotlin Android SDK for OpenRouter: model discovery, chat, streaming, cost estimation.")

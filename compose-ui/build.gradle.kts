@@ -56,7 +56,7 @@ dependencies {
 mavenPublishing {
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, automaticRelease = true)
     signAllPublications()
-    coordinates("io.openrouter.android", "auto-compose", "1.0.0")
+    coordinates("io.openrouter.android", "auto-compose", "1.0.1")
     pom {
         name.set("OpenRouter Android Auto — Compose UI")
         description.set("Optional Material3 Compose components for the OpenRouter Android SDK.")
