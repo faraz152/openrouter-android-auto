@@ -1,5 +1,6 @@
 package io.openrouter.android.auto.sample.compose
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -42,10 +43,10 @@ class MainActivity : ComponentActivity() {
                             ModelBrowserScreen(
                                 viewModel = viewModel,
                                 onChatClick = { modelId ->
-                                    navController.navigate("chat/$modelId")
+                                    navController.navigate("chat/${Uri.encode(modelId)}")
                                 },
                                 onCostClick = { modelId ->
-                                    navController.navigate("cost/$modelId")
+                                    navController.navigate("cost/${Uri.encode(modelId)}")
                                 }
                             )
                         }
