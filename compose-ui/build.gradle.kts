@@ -52,7 +52,7 @@ dependencies {
 // ── Maven publishing ──────────────────────────────────────────────────────────
 
 mavenPublishing {
-    publishToMavenCentral(com.vanniktech.maven.publish.SonatypeHost.CENTRAL_PORTAL, automaticRelease = true)
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, automaticRelease = true)
     signAllPublications()
     coordinates("io.openrouter.android", "auto-compose", "1.0.0")
     pom {
