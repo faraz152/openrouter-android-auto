@@ -8,6 +8,9 @@ jobs:
   publish:
     name: Publish to Maven Central & GitHub Packages
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
 
     steps:
       - name: Checkout
