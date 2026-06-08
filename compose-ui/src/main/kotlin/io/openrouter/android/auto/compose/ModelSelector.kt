@@ -11,8 +11,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
@@ -78,24 +77,11 @@ fun ModelSelector(
             value = selectedModel?.name ?: searchQuery,
             onValueChange = { query ->
                 searchQuery = query
-                expanded = query.isNotEmpty() || expanded
+                expanded = true
             },
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable { expanded = !expanded },
+            modifier = Modifier.fillMaxWidth(),
             placeholder = { Text(placeholder) },
-            singleLine = true,
-            readOnly = selectedModel != null && searchQuery.isEmpty(),
-            trailingIcon = {
-                Text(
-                    text = if (expanded) "▲" else "▼",
-                    modifier = Modifier
-                        .clickable { expanded = !expanded }
-                        .padding(horizontal = 8.dp),
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            }
+            singleLine = true
         )
 
         // Filter chips row
@@ -123,27 +109,26 @@ fun ModelSelector(
             }
         }
 
-        if (expanded && filteredModels.isNotEmpty()) {
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .heightIn(max = 400.dp),
-                elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
-            ) {
-                LazyColumn {
-                    items(filteredModels, key = { it.id }) { model ->
-                        ModelItem(
-                            model = model,
-                            showPricing = showPricing,
-                            showContextLength = showContextLength,
-                            onClick = {
-                                onSelect(model)
-                                searchQuery = ""
-                                expanded = false
-                            }
-                        )
-                        HorizontalDivider()
-                    }
+        DropdownMenu(
+            expanded = expanded && filteredModels.isNotEmpty(),
+            onDismissRequest = { expanded = false },
+            modifier = Modifier
+                .fillMaxWidth(0.9f)
+                .heightIn(max = 400.dp)
+        ) {
+            LazyColumn(modifier = Modifier.heightIn(max = 400.dp)) {
+                items(filteredModels, key = { it.id }) { model ->
+                    ModelItem(
+                        model = model,
+                        showPricing = showPricing,
+                        showContextLength = showContextLength,
+                        onClick = {
+                            onSelect(model)
+                            searchQuery = ""
+                            expanded = false
+                        }
+                    )
+                    HorizontalDivider()
                 }
             }
         }
